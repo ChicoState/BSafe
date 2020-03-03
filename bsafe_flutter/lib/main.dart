@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// Added
+import 'package:geolocator/geolocator.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,9 +20,9 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'BSafe'),
     );
   }
 }
@@ -44,17 +46,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int counter = 0;
+  Position pos;
+  String lat = "1st";
+  String long = "2nd";
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  //*** Asynchronous function that gets your geoposition and stores it into lat and long variables
+  Future<Position>  getPos() async {
+    pos = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    lat = pos.latitude.toString();
+    long = pos.longitude.toString();
+
+    return pos;
   }
 
   @override
@@ -92,20 +95,35 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'Your geolocation is:',
             ),
             Text(
-              '$_counter',
+              'Lat: $lat \nLong: $long',
               style: Theme.of(context).textTheme.display1,
+            ),
+            Text(
+              'You\'ve requested your location $counter times.',
             ),
           ],
         ),
       ),
+      //
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 50.0,
+        ),
+      ),
+      //
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () => setState(() {
+          getPos();
+          counter++;
+        }),
+        tooltip: 'Geolocation',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, //*** Centers the action button to the bottom-center
     );
   }
 }
