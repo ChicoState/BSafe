@@ -31,7 +31,6 @@ class Settings extends StatelessWidget {
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[
-            DrawerItem(dLeading:Icon(Icons.home), dTitle:"Home", dOnTap:MyApp()),
             DrawerItem(dLeading:Icon(Icons.map), dTitle:"Map", dOnTap:ThirdScreen()),
             DrawerItem(dLeading:Icon(Icons.contacts), dTitle:"Contacts", dOnTap:SecondScreen()),
             DrawerItem(dLeading:Icon(Icons.message), dTitle:"Messaging", dOnTap:FourthScreen()),
