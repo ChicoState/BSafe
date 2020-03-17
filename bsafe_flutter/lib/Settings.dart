@@ -1,4 +1,4 @@
-// FourthScreen.dart -- Brendon
+// Settingss.dart
 
 import 'package:flutter/material.dart';
 
@@ -27,7 +27,11 @@ class Settings extends StatelessWidget {
           )
         ]
       ),
-
+      body: SafeArea(
+        child: Center(
+        child: Text('Settings')
+        ),
+      ),
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[

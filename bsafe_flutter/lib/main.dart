@@ -122,7 +122,11 @@ class _MyHomePage extends State<MyHomePage> {
             )
           ]
         ),
-      body: Center(child: Text('Main Page')),
+      body: SafeArea(
+        child: Center(
+        child: Text('Main Page')
+        ),
+      ),
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[ 

@@ -72,13 +72,15 @@ class _MyMapState extends State<MyMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GoogleMap(
+      body: SafeArea(
+        child: GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
             zoom: 11.0,
           ),
         ),
-      );
+      ),
+    );
   }
 }

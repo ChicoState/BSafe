@@ -38,6 +38,12 @@ class SecondScreen extends StatelessWidget {
         ]
       ),
 
+      body: SafeArea(
+        child: Center(
+        child: Text('Contacts')
+        ),
+      ),
+      
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[

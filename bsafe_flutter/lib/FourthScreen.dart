@@ -38,6 +38,12 @@ class FourthScreen extends StatelessWidget {
         ]
       ),
 
+      body: SafeArea(
+        child: Center(
+        child: Text('Messaging')
+        ),
+      ),
+      
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[

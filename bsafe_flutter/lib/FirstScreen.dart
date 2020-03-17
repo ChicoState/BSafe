@@ -39,7 +39,9 @@ class FirstScreen extends StatelessWidget {
         ]
       ),
       
-      body: MyHomePage(title: 'BSafe'),
+      body: SafeArea(
+        child:MyHomePage(title: 'BSafe')
+      ),
       
       drawer: Drawer(
         child: ListView(  
