@@ -7,6 +7,7 @@ import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
 import 'package:BSafe/SecondScreen.dart';
 import 'package:BSafe/FourthScreen.dart';
+import 'package:BSafe/Settings.dart';
 
 class ThirdScreen extends StatelessWidget {
   @override
@@ -14,6 +15,28 @@ class ThirdScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Map"),
+        actions: <Widget> [
+          IconButton(
+            icon: const Icon(Icons.home),
+            tooltip: 'Homepage',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyApp()),
+              );
+            },            
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Settings',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settings()),
+              );
+            },            
+          )
+        ]
       ),
 
       body: MyMap(title: 'BSafe'),
@@ -21,7 +44,6 @@ class ThirdScreen extends StatelessWidget {
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[
-            DrawerItem(dLeading:Icon(Icons.home), dTitle:"Home", dOnTap:MyApp()),
             DrawerItem(dLeading:Icon(Icons.contacts), dTitle:"Contacts", dOnTap:SecondScreen()),
             DrawerItem(dLeading:Icon(Icons.message), dTitle:"Messaging", dOnTap:FourthScreen()),
             DrawerItem(dLeading:Icon(Icons.timer), dTitle:"Timers", dOnTap:FirstScreen()),

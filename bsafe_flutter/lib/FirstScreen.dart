@@ -7,6 +7,7 @@ import 'package:BSafe/main.dart';
 import 'package:BSafe/SecondScreen.dart';
 import 'package:BSafe/ThirdScreen.dart';
 import 'package:BSafe/FourthScreen.dart';
+import 'package:BSafe/Settings.dart';
 
 class FirstScreen extends StatelessWidget {
   @override
@@ -14,14 +15,35 @@ class FirstScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Timers"),
+        actions: <Widget> [
+          IconButton(
+            icon: const Icon(Icons.home),
+            tooltip: 'Homepage',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyApp()),
+              );
+            },            
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Settings',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settings()),
+              );
+            },            
+          )
+        ]
       ),
       
       body: MyHomePage(title: 'BSafe'),
       
       drawer: Drawer(
         child: ListView(  
-          children: <Widget>[ 
-            DrawerItem(dLeading:Icon(Icons.home), dTitle:"Home", dOnTap:MyApp()),
+          children: <Widget>[
             DrawerItem(dLeading:Icon(Icons.map), dTitle:"Map", dOnTap:ThirdScreen()),
             DrawerItem(dLeading:Icon(Icons.contacts), dTitle:"Contacts", dOnTap:SecondScreen()),
             DrawerItem(dLeading:Icon(Icons.message), dTitle:"Messaging", dOnTap:FourthScreen()),

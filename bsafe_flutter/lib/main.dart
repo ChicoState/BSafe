@@ -7,6 +7,7 @@ import 'package:BSafe/FirstScreen.dart';
 import 'package:BSafe/SecondScreen.dart';
 import 'package:BSafe/ThirdScreen.dart';
 import 'package:BSafe/FourthScreen.dart';
+import 'package:BSafe/Settings.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,7 +68,21 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+          actions: <Widget> [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              tooltip: 'Settings',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Settings()),
+                );
+              },            
+            )
+          ]
+        ),
       body: Center(child: Text('Main Page')),
       drawer: Drawer(
         child: ListView(  
