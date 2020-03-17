@@ -1,60 +1,102 @@
 // main.dart
 
-// ADD NEW SCREENS HERE
-
 import 'package:flutter/material.dart';
 
-// IMPORT TAB FILES HERE
-import 'FirstScreen.dart';
-import 'SecondScreen.dart';
-import 'ThirdScreen.dart';
-import 'FourthScreen.dart';
+// IMPORT NEW SCREENS HERE
+import 'package:BSafe/FirstScreen.dart';
+import 'package:BSafe/SecondScreen.dart';
+import 'package:BSafe/ThirdScreen.dart';
+import 'package:BSafe/FourthScreen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final appTitle = "BSafe";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DefaultTabController(
-        length: 4, // CHANGE WHEN ADDING A NEW SCREEN
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                // ADD TABS HERE
-                Tab(icon: Icon(Icons.location_on)),
-                Tab(icon: Icon(Icons.contacts)),
-                Tab(icon: Icon(Icons.map)),
-                Tab(icon: Icon(Icons.textsms)),
-              ],
-            ),
-            title: Text('BSafe'),
-          ),
-          body: TabBarView(
-            children: [
-              FirstScreen(),
-              SecondScreen(),
-              ThirdScreen(),
-              FourthScreen(),
-            ],
-          ),
-        ),
-      ),
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.deepPurple,
-      ),
+      title: appTitle,
+      home: MyHomePage(title: appTitle),
     );
   }
 }
+
+class MyHomePage extends StatelessWidget {
+  final String title;
+
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold (
+      appBar: AppBar(title: Text(title)),
+      body: Center(child: Text('Main Page')),
+      drawer: Drawer(
+        child: ListView(  
+          children: <Widget>[ 
+            ListTile(
+              leading: Icon(Icons.map),
+              title: Text("Map"),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ThirdScreen()),
+                );
+              },              
+            ),
+            ListTile(
+              leading: Icon(Icons.contacts),
+              title: Text("Contacts"),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SecondScreen()),
+                );
+              },              
+            ),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text("Messaging"),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FourthScreen()),
+                );
+              },              
+            ),
+            ListTile(
+              leading: Icon(Icons.timer),
+              title: Text("Timers"),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FirstScreen()),
+                );
+              },              
+            ),
+          ]
+        )   
+      )
+    );
+  }
+}
+
+/*
+class DrawerItem extends StatelessWidget {
+  final String title;
+  DrawerItem({Key key, this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold (
+    );
+  }
+}
+*/
