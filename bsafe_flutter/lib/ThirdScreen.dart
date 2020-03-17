@@ -20,51 +20,11 @@ class ThirdScreen extends StatelessWidget {
 
       drawer: Drawer(
         child: ListView(  
-          children: <Widget>[ 
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyApp()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.contacts),
-              title: Text("Contacts"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SecondScreen()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text("Messaging"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FourthScreen()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.timer),
-              title: Text("Timers"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FirstScreen()),
-                );
-              },              
-            ),
+          children: <Widget>[
+            DrawerItem(dLeading:Icon(Icons.home), dTitle:"Home", dOnTap:MyApp()),
+            DrawerItem(dLeading:Icon(Icons.contacts), dTitle:"Contacts", dOnTap:SecondScreen()),
+            DrawerItem(dLeading:Icon(Icons.message), dTitle:"Messaging", dOnTap:FourthScreen()),
+            DrawerItem(dLeading:Icon(Icons.timer), dTitle:"Timers", dOnTap:FirstScreen()),
           ]
         )
       )
@@ -89,17 +49,7 @@ class _MyMapState extends State<MyMap> {
 }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        //Remove the debug here
-        /*
-        appBar: AppBar(
-          title:Center(
-            child:Text('Map'),
-          ),
-          backgroundColor: Colors.deepPurple,
-        ),
-        */
+    return Scaffold(
         body: GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
@@ -107,8 +57,6 @@ class _MyMapState extends State<MyMap> {
             zoom: 11.0,
           ),
         ),
-      ),
-    );
+      );
   }
 }
-

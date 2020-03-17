@@ -21,50 +21,10 @@ class FirstScreen extends StatelessWidget {
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[ 
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyApp()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.map),
-              title: Text("Map"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ThirdScreen()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.contacts),
-              title: Text("Contacts"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SecondScreen()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text("Messaging"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FourthScreen()),
-                );
-              },              
-            ),
+            DrawerItem(dLeading:Icon(Icons.home), dTitle:"Home", dOnTap:MyApp()),
+            DrawerItem(dLeading:Icon(Icons.map), dTitle:"Map", dOnTap:ThirdScreen()),
+            DrawerItem(dLeading:Icon(Icons.contacts), dTitle:"Contacts", dOnTap:SecondScreen()),
+            DrawerItem(dLeading:Icon(Icons.message), dTitle:"Messaging", dOnTap:FourthScreen()),
           ]
         )
       )

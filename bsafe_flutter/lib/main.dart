@@ -12,6 +12,33 @@ void main() {
   runApp(MyApp());
 }
 
+// --- Start of Custom Drawer Widget
+class DrawerItem extends StatelessWidget {
+  DrawerItem({Key key, this.dLeading, this.dTitle, this.dOnTap}) : super(key: key);
+
+  final Widget dLeading;
+  final String dTitle;
+  final Widget dOnTap;
+
+  //@override
+  Widget build(BuildContext context) {
+    return InkWell(
+        child: ListTile(
+          leading: dLeading,
+          title: Text(dTitle),
+          trailing: Icon(Icons.arrow_right),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => dOnTap),
+            );
+          }, 
+        )
+    );
+  }
+}
+// --- End of Custom Drawer Widget
+
 class MyApp extends StatelessWidget {
   final appTitle = "BSafe";
 
@@ -37,66 +64,13 @@ class MyHomePage extends StatelessWidget {
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[ 
-            ListTile(
-              leading: Icon(Icons.map),
-              title: Text("Map"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ThirdScreen()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.contacts),
-              title: Text("Contacts"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SecondScreen()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text("Messaging"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FourthScreen()),
-                );
-              },              
-            ),
-            ListTile(
-              leading: Icon(Icons.timer),
-              title: Text("Timers"),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FirstScreen()),
-                );
-              },              
-            ),
+            DrawerItem(dLeading:Icon(Icons.map), dTitle:"Map", dOnTap:ThirdScreen()),
+            DrawerItem(dLeading:Icon(Icons.contacts), dTitle:"Contacts", dOnTap:SecondScreen()),
+            DrawerItem(dLeading:Icon(Icons.message), dTitle:"Messaging", dOnTap:FourthScreen()),
+            DrawerItem(dLeading:Icon(Icons.timer), dTitle:"Timers", dOnTap:FirstScreen()),
           ]
         )   
       )
     );
   }
 }
-
-/*
-class DrawerItem extends StatelessWidget {
-  final String title;
-  DrawerItem({Key key, this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold (
-    );
-  }
-}
-*/
