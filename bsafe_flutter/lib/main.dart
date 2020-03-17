@@ -9,6 +9,8 @@ import 'package:BSafe/ThirdScreen.dart';
 import 'package:BSafe/FourthScreen.dart';
 import 'package:BSafe/Settings.dart';
 
+import 'package:permission_handler/permission_handler.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -55,21 +57,58 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       title: appTitle,
-      home: MyHomePage(title: appTitle),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
 
-  MyHomePage({Key key, this.title}) : super(key: key);
+//
+class PermissionsService {
+  final PermissionHandler _permissionHandler = PermissionHandler();
+
+ Future<bool> _requestPermission(PermissionGroup permission) async {
+    var result = await _permissionHandler.requestPermissions([permission]);
+    if (result[permission] == PermissionStatus.granted) {
+      return true;
+    }
+    return false;
+  }
+
+  // Permission for contacts
+  Future<bool> requestContactsPermission() async {
+    return _requestPermission(PermissionGroup.contacts);
+  }
+  // Permission for location
+  Future<bool> requestLocationPermission() async {
+    return _requestPermission(PermissionGroup.locationWhenInUse);
+  }
+}
+//
+
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePage createState() => _MyHomePage();
+}
+
+class _MyHomePage extends State<MyHomePage> {
+  @override
+  initState() {
+    super.initState();
+    requestPerm();
+  }
+
+  Future<void> requestPerm() async {
+    await PermissionsService().requestContactsPermission();
+    await PermissionsService().requestLocationPermission();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(
-        title: Text(title),
+        title: Text("BSafe"),
           actions: <Widget> [
             IconButton(
               icon: const Icon(Icons.settings),
