@@ -45,6 +45,7 @@ class _ContactsState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /*
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -53,6 +54,7 @@ class _ContactsState extends State<ContactsPage> {
           });
         },
       ),
+      */
       body: SafeArea(
         child: _contacts != null ? ListView.builder(  
           // Equals the number of contacts; if there are no contacts it equals 0
@@ -62,6 +64,11 @@ class _ContactsState extends State<ContactsPage> {
             return Column ( // Displays and divides the contacts
               children: <Widget>[
                 ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            ContactDetailsPage(c)));
+                  },
                   leading: (c.avatar != null && c.avatar.length > 0)
                       ? CircleAvatar(backgroundImage: MemoryImage(c.avatar))
                       : CircleAvatar(child: Text(c.initials())),
@@ -72,6 +79,55 @@ class _ContactsState extends State<ContactsPage> {
             );
           }
         ) : Center(child: CircularProgressIndicator(),),
+      ),
+    );
+  }
+}
+
+class ContactDetailsPage extends StatelessWidget {
+  ContactDetailsPage(this._contact);
+  final Contact _contact;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Contact Details"),
+      ),
+      body: SafeArea(
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text("Name"),
+              trailing: Text(_contact.givenName ?? ""),
+            ),
+            ListTile(
+              title: Text("Middle name"),
+              trailing: Text(_contact.middleName ?? ""),
+            ),
+            ListTile(
+              title: Text("Family name"),
+              trailing: Text(_contact.familyName ?? ""),
+            ),
+            ListTile(
+              title: Text("Prefix"),
+              trailing: Text(_contact.prefix ?? ""),
+            ),
+            ListTile(
+              title: Text("Suffix"),
+              trailing: Text(_contact.suffix ?? ""),
+            ),
+            ListTile(
+              title: Text("Company"),
+              trailing: Text(_contact.company ?? ""),
+            ),
+            ListTile(
+              title: Text("Job"),
+              trailing: Text(_contact.jobTitle ?? ""),
+            ),
+            //
+          ],
+        ),
       ),
     );
   }
