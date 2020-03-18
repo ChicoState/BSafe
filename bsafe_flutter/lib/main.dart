@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
 }
 
 
-//
+// --- Permission Requesting
 class PermissionsService {
   final PermissionHandler _permissionHandler = PermissionHandler();
 
@@ -73,6 +73,14 @@ class PermissionsService {
       return true;
     }
     return false;
+  }
+
+  Future<bool> requestContactsPerm({Function onPermissionDenied}) async {
+    var granted = await _requestPermission(PermissionGroup.contacts);
+    if (!granted) {
+      onPermissionDenied();
+    }
+    return granted;
   }
 
   // Permission for contacts

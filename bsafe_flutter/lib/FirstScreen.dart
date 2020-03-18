@@ -108,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       //
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.deepPurple,
         onPressed: () => setState(() {
           getPos();
           counter++;

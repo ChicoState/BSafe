@@ -8,6 +8,75 @@ import 'package:BSafe/ThirdScreen.dart';
 import 'package:BSafe/FourthScreen.dart';
 import 'package:BSafe/Settings.dart';
 
+import 'package:contacts_service/contacts_service.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+class ContactsPage extends StatefulWidget {
+  @override
+  _ContactsState createState() => _ContactsState();
+}
+
+class _ContactsState extends State<ContactsPage> {
+  List<Contact> _contacts;
+
+  @override
+  initState() {
+    super.initState();
+    refreshContacts();
+  }
+
+  refreshContacts() async {
+    PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.contacts);
+
+    if (permission == PermissionStatus.granted) {
+      var contacts = (await ContactsService.getContacts(withThumbnails: false)).toList();
+
+      setState(() {
+        _contacts = contacts;
+      });
+
+    } else {
+      print("Permission to access contacts is disabled.");
+    }
+  }
+
+  ////
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.of(context).pushNamed("/add").then((_) {
+            //refreshContacts();
+          });
+        },
+      ),
+      body: SafeArea(
+        child: _contacts != null ? ListView.builder(  
+          // Equals the number of contacts; if there are no contacts it equals 0
+          itemCount: _contacts?.length ?? 0,
+          itemBuilder: (BuildContext context, int index) {
+            Contact c = _contacts?.elementAt(index);
+            return Column ( // Displays and divides the contacts
+              children: <Widget>[
+                ListTile(
+                  leading: (c.avatar != null && c.avatar.length > 0)
+                      ? CircleAvatar(backgroundImage: MemoryImage(c.avatar))
+                      : CircleAvatar(child: Text(c.initials())),
+                  title: Text(c.displayName ?? ""),
+                ),
+                Divider(),
+              ],
+            );
+          }
+        ) : Center(child: CircularProgressIndicator(),),
+      ),
+    );
+  }
+}
+
 class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -40,7 +109,7 @@ class SecondScreen extends StatelessWidget {
 
       body: SafeArea(
         child: Center(
-        child: Text('Contacts')
+          child: ContactsPage(),
         ),
       ),
       
