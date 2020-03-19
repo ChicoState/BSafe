@@ -1,4 +1,4 @@
-// FourthScreen.dart -- Brendon
+// Settingss.dart
 
 import 'package:flutter/material.dart';
 
@@ -6,14 +6,14 @@ import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
 import 'package:BSafe/SecondScreen.dart';
 import 'package:BSafe/ThirdScreen.dart';
-import 'package:BSafe/Settings.dart';
+import 'package:BSafe/FourthScreen.dart';
 
-class FourthScreen extends StatelessWidget {
+class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Messaging"),
+        title: Text("Settings"),
         actions: <Widget> [
           IconButton(
             icon: const Icon(Icons.home),
@@ -24,34 +24,23 @@ class FourthScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => MyApp()),
               );
             },            
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            tooltip: 'Settings',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Settings()),
-              );
-            },            
           )
         ]
       ),
-
       body: SafeArea(
         child: Center(
-        child: Text('Messaging')
+        child: Text('Settings')
         ),
       ),
-      
       drawer: Drawer(
         child: ListView(  
           children: <Widget>[
             DrawerItem(dLeading:Icon(Icons.map), dTitle:"Map", dOnTap:ThirdScreen()),
             DrawerItem(dLeading:Icon(Icons.contacts), dTitle:"Contacts", dOnTap:SecondScreen()),
+            DrawerItem(dLeading:Icon(Icons.message), dTitle:"Messaging", dOnTap:FourthScreen()),
             DrawerItem(dLeading:Icon(Icons.timer), dTitle:"Timers", dOnTap:FirstScreen()),
           ]
-        )   
+        )
       )
     );
   }
