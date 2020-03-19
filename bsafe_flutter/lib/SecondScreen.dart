@@ -227,12 +227,9 @@ class ContactDetailsPage extends StatelessWidget {
                 Items("Phones", _contact.phones ?? ""),
                 Divider(thickness: 2,),
                 Items("Emails", _contact.emails ?? "")
-                /*
-
-                */
               ],
             );
-          }
+          },
         ),
       ),
     );
@@ -293,7 +290,7 @@ class Items extends StatelessWidget {
       children: <Widget>[
         ListTile(title: Text(_title)),
         Column(
-          children: _items.map((item) => Padding(
+          children: _items.toSet().map((item) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: ListTile(
               title: Text(item.label ?? ""),
