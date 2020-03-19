@@ -211,35 +211,97 @@ class ContactDetailsPage extends StatelessWidget {
                   title: Text("Name"),
                   trailing: Text(_contact.givenName ?? ""),
                 ),
+                Divider(thickness: 2,),
                 ListTile(
                   title: Text("Middle name"),
                   trailing: Text(_contact.middleName ?? ""),
                 ),
+                Divider(thickness: 2,),
                 ListTile(
                   title: Text("Family name"),
                   trailing: Text(_contact.familyName ?? ""),
                 ),
-                ListTile(
-                  title: Text("Prefix"),
-                  trailing: Text(_contact.prefix ?? ""),
-                ),
-                ListTile(
-                  title: Text("Suffix"),
-                  trailing: Text(_contact.suffix ?? ""),
-                ),
-                ListTile(
-                  title: Text("Company"),
-                  trailing: Text(_contact.company ?? ""),
-                ),
-                ListTile(
-                  title: Text("Job"),
-                  trailing: Text(_contact.jobTitle ?? ""),
-                ),
+                Divider(thickness: 2,),
+                Addresses(_contact.postalAddresses ?? ""),
+                Divider(thickness: 2,),
+                Items("Phones", _contact.phones ?? ""),
+                Divider(thickness: 2,),
+                Items("Emails", _contact.emails ?? "")
+                /*
+
+                */
               ],
             );
           }
         ),
       ),
+    );
+  }
+}
+
+class Addresses extends StatelessWidget {
+  Addresses(this._addresses);
+  final Iterable<PostalAddress> _addresses;
+
+  Widget build(BuildContext context) {
+    return Column (
+      children: <Widget>[
+        ListTile(title: Text("Addresses")),
+        Column(
+          children: _addresses.map((item) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text("Street"),
+                  trailing: Text(item.street ?? ""),
+                ),
+                ListTile(
+                  title: Text("Postcode"),
+                  trailing: Text(item.postcode ?? ""),
+                ),
+                ListTile(
+                  title: Text("City"),
+                  trailing: Text(item.city ?? ""),
+                ),
+                ListTile(
+                  title: Text("Region"),
+                  trailing: Text(item.region ?? ""),
+                ),
+                ListTile(
+                  title: Text("Country"),
+                  trailing: Text(item.country ?? ""),
+                ),
+              ],
+            ),
+          )).toList(),
+        )
+      ],
+    );
+  }
+}
+
+class Items extends StatelessWidget {
+  Items(this._title, this._items);
+  final Iterable<Item> _items;
+  final String _title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        ListTile(title: Text(_title)),
+        Column(
+          children: _items.map((item) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: ListTile(
+              title: Text(item.label ?? ""),
+              trailing: Text(item.value ?? ""),
+            ),),
+          ).toList(),
+        ),
+      ],
     );
   }
 }
