@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 
+
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -17,6 +18,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="BSafe"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDMmY8kETjbKef1-qYgFiiTihv2J-_DBnY"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
