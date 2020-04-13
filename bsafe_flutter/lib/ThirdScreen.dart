@@ -1,10 +1,12 @@
 // ThirdScreen.dart -- Chris / Logan
 
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
@@ -68,18 +70,9 @@ class MyMap extends StatefulWidget {
 class _MyMapState extends State<MyMap> {
   Completer<GoogleMapController> _controller = Completer();
   final Map<String, Marker> _markers = {};
-
-  //*** Geolocation API Documentation: https://pub.dev/packages/geolocator#-readme-tab-
-  Future<String> _getAddress(Position loc) async {
-    List<Placemark> placemarks = await Geolocator().placemarkFromCoordinates(loc.latitude, loc.longitude);
-    if (placemarks != null && placemarks.isNotEmpty) {
-      final Placemark loc = placemarks[0];
-      //*** Grab the street, city, and postal code from your location
-      return loc.thoroughfare + ', ' + loc.locality + ', ' + loc.postalCode;
-
-    }
-    return "";
-  }
+  final Set<Marker> _markers2 = {};
+  static final LatLng _center = const LatLng(39.8283, -98.5795);
+   LatLng _lastposition = _center;
 
   //*** GoogleMapController Documentation: https://pub.dev/packages/google_maps_flutter
   Future<void> _moveToPosition(Position loc) async {
@@ -94,14 +87,24 @@ class _MyMapState extends State<MyMap> {
     )
     );
   }
+  //*** Geolocation API Documentation: https://pub.dev/packages/geolocator#-readme-tab-
+  Future<String> _getAddress(Position loc) async {
+    List<Placemark> placemarks = await Geolocator().placemarkFromCoordinates(loc.latitude, loc.longitude);
+    if (placemarks != null && placemarks.isNotEmpty) {
+      final Placemark loc = placemarks[0];
+      //*** Grab the street, city, and postal code from your location
+      return loc.thoroughfare + ', ' + loc.locality + ', ' + loc.postalCode;
+
+    }
+    return "";
+  }
   void _getLoc() async {
     //*** Grab Current Location of the Device
     Position currloc = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     var currentAddress = await _getAddress(currloc);
     await _moveToPosition(currloc);
-
     setState(() {
-      _markers.clear();
+      //_markers.clear();
       final marker = Marker(
         markerId: MarkerId("curr_loc"),
         position: LatLng(currloc.latitude, currloc.longitude),
@@ -111,13 +114,37 @@ class _MyMapState extends State<MyMap> {
     });
   }
 
-  //*** Coordinates for chico
-  final LatLng _center = const LatLng(39.8283, -98.5795);
+  Future<String> _getAddlatlong(double lat, double long) async {
+    List<Placemark> placemarks = await Geolocator().placemarkFromCoordinates(lat, long);
+    if (placemarks != null && placemarks.isNotEmpty) {
+      final Placemark loc = placemarks[0];
+      //*** Grab the street, city, and postal code from your location
+      return loc.thoroughfare + ', ' + loc.locality + ', ' + loc.postalCode;
+
+    }
+    return "";
+  }
+ void _addMarker() async{
+  var markAddress =  await _getAddlatlong(_lastposition.latitude, _lastposition.longitude);
+  setState(() {
+    //_markers.clear();
+    final marker = Marker(
+      markerId: MarkerId("place_loc"),
+      position: _lastposition,
+      infoWindow: InfoWindow(title: markAddress),
+    );
+    _markers["Placed_Location"] = marker;
+  });
+  }
 
   void _onMapCreated(GoogleMapController controller) {
     setState(() {
       _controller.complete(controller);
     });
+  }
+
+  void _onCameraMove(CameraPosition position){
+    _lastposition = position.target;
   }
   @override
   Widget build(BuildContext context) {
@@ -130,14 +157,27 @@ class _MyMapState extends State<MyMap> {
               zoom: 1.0,
             ),
             markers: _markers.values.toSet(),
+            onCameraMove: _onCameraMove,
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
+        floatingActionButton: SpeedDial(
+          child: Icon(Icons.add),
           backgroundColor: Colors.deepPurple,
-          onPressed: _getLoc,
-          label: Text('Location'),
-          icon: Icon(Icons.directions_walk),
-        )
+          children: [
+              SpeedDialChild(
+                child: Icon(Icons.directions_walk),
+                backgroundColor: Colors.deepPurpleAccent,
+                label: 'Location',
+                onTap: _getLoc
+              ),
+              SpeedDialChild(
+                child: Icon(Icons.navigation),
+                backgroundColor: Colors.deepPurpleAccent,
+                label: 'Place Marker',
+                onTap: _addMarker,
+              )
+          ],
+        ),
     );
   }
 }
