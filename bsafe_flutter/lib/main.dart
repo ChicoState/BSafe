@@ -1,5 +1,7 @@
 // main.dart
-
+import 'package:BSafe/models/user.dart';
+import 'package:BSafe/services/auth_verify.dart';
+import 'package:BSafe/wrapper.dart';
 import 'package:flutter/material.dart';
 
 // IMPORT NEW SCREENS HERE
@@ -10,9 +12,10 @@ import 'package:BSafe/FourthScreen.dart';
 import 'package:BSafe/Settings.dart';
 
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Starting());
 }
 
 // --- Start of Custom Drawer Widget
@@ -25,6 +28,11 @@ class DrawerItem extends StatelessWidget {
 
   //@override
   Widget build(BuildContext context) {
+    /*
+    return MaterialApp(
+      home: Wrapper(),
+    );
+    */
     return InkWell(
         child: ListTile(
           leading: dLeading,
@@ -41,6 +49,26 @@ class DrawerItem extends StatelessWidget {
   }
 }
 // --- End of Custom Drawer Widget
+
+class Starting extends StatefulWidget {
+  @override
+  _StartingState createState() => _StartingState();
+}
+
+class _StartingState extends State<Starting> {
+  @override
+  Widget build(BuildContext context) {
+    //Provider
+    return StreamProvider<User>.value (
+        //Listening to:
+        value: AuthService().user,
+        //Wrapping material app
+        child: MaterialApp(
+        home: Wrapper(),
+      ),
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   final appTitle = "BSafe";
@@ -101,6 +129,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePage extends State<MyHomePage> {
+  final AuthService _auth = AuthService();
+
   @override
   initState() {
     super.initState();
@@ -117,7 +147,15 @@ class _MyHomePage extends State<MyHomePage> {
     return Scaffold (
       appBar: AppBar(
         title: Text("BSafe"),
+        elevation: 0.0,
           actions: <Widget> [
+            FlatButton.icon(
+              onPressed: () async {
+                await _auth.signOut();
+              }, 
+              icon: Icon(Icons.person), 
+              label: Text('Logout')
+            ),
             IconButton(
               icon: const Icon(Icons.settings),
               tooltip: 'Settings',

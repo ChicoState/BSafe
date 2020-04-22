@@ -27,6 +27,10 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: any
   google_maps_flutter: ^0.5.11
+  firebase_auth: ^0.15.5+3
+  cloud_firestore: ^0.13.4+2
+  provider: ^4.0.5
+  flutter_spinkit: ^4.1.2+1
 
 dev_dependencies:
   flutter_test:
@@ -42,9 +46,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-  assets:
-    - assets/marker.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
