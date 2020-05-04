@@ -43,7 +43,7 @@ class _ContactsState extends State<ContactsPage> {
 
   @override
   void initState() {
-    this._getContacts();
+    this.getContacts();
     super.initState();
   }
 
@@ -72,7 +72,7 @@ class _ContactsState extends State<ContactsPage> {
            IconButton(
             icon: new Icon(Icons.search),
             tooltip: 'Search',
-            onPressed: _searchPressed,            
+            onPressed: searchPressed,            
           ),  
             IconButton(
             icon: const Icon(Icons.home),
@@ -154,7 +154,7 @@ class _ContactsState extends State<ContactsPage> {
     );
   }
 
-  void _searchPressed() {
+  void searchPressed() {
     setState(() {
       if (this._searchIcon.icon == Icons.search) {
         this._searchIcon = new Icon(Icons.close);
@@ -174,7 +174,7 @@ class _ContactsState extends State<ContactsPage> {
     });
   }
 
-  void _getContacts() async {
+  void getContacts() async {
      PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.contacts);
 
     if (permission == PermissionStatus.granted) {

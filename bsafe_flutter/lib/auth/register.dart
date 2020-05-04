@@ -116,25 +116,6 @@ class _RegisterState extends State<Register> {
             )
           ]
         )
-        /*
-        child: RaisedButton(
-          child: Text("Sign in anonymously"),
-          onPressed: () async {
-            //Dynamic because it could be null or a Firebase user
-            //Attempts to signin and waits for this to resolve
-            dynamic result = await _auth.signInAnon();
-
-            if (result == null) {
-              print('Error signing in');
-            } else {
-              //Received user object
-              print('Signed in');
-              //print(result);
-              print(result.uid);
-            }
-          }
-        ),
-        */
       ),
     );
   }

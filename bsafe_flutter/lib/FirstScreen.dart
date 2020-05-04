@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String long = "2nd";
 
   //*** Asynchronous function that gets your geoposition and stores it into lat and long variables
-  Future<Position>  getPos() async {
+  Future<Position> getPos() async {
     pos = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     lat = pos.latitude.toString();
     long = pos.longitude.toString();
