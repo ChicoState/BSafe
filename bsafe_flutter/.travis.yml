@@ -30,7 +30,7 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: - ./flutter/bin/flutter test
+  script: - flutter test
   on:
     tags: true
 cache:
