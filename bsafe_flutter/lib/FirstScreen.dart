@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               'Lat: $lat \nLong: $long',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headline,
             ),
             Text(
               'You\'ve requested your location $counter times.',

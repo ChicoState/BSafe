@@ -17,7 +17,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="BSafe"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDMmY8kETjbKef1-qYgFiiTihv2J-_DBnY"/>
         <activity
