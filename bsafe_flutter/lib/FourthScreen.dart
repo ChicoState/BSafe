@@ -46,11 +46,12 @@ class FourthScreen extends StatelessWidget {
         child: Center(
           child: Column(children: <Widget>[
             panicButton(),
-            panicButtonUsingContacts()
+            panicButtonUsingContacts(),
             ]
           )
         ),
       ),
+
       
       drawer: Drawer(
         child: ListView(  
@@ -112,7 +113,7 @@ class panicButtonUsingContacts extends FourthScreen {
         RaisedButton(
           child: Text('Send Panic Message Using Contacts'),
           onPressed: () {
-            getContacts();
+            sendPanicToContacts();
           },
         ),
       ],
@@ -120,7 +121,7 @@ class panicButtonUsingContacts extends FourthScreen {
   }
 }
 
-Future<void> getContacts() async {
+Future<void> sendPanicToContacts() async {
   final Iterable<Contact> contacts = await ContactsService.getContacts();
   contacts.forEach((contact){
     for (var number in contact.phones) {
