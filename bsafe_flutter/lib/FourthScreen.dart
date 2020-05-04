@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
+import 'package:contacts_service/contacts_service.dart';
 
 import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
@@ -43,7 +44,11 @@ class FourthScreen extends StatelessWidget {
 
       body: SafeArea(
         child: Center(
-          child: panicButton()
+          child: Column(children: <Widget>[
+            panicButton(),
+            panicButtonUsingContacts()
+            ]
+          )
         ),
       ),
       
@@ -97,3 +102,31 @@ class panicButton extends FourthScreen {
     );
   }
 }
+
+class panicButtonUsingContacts extends FourthScreen {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        RaisedButton(
+          child: Text('Send Panic Message Using Contacts'),
+          onPressed: () {
+            getContacts();
+          },
+        ),
+      ],
+    );
+  }
+}
+
+Future<void> getContacts() async {
+  final Iterable<Contact> contacts = await ContactsService.getContacts();
+  contacts.forEach((contact){
+    for (var number in contact.phones) {
+      var temp = number.value;
+      sendPanic(temp);
+    }
+  });
+}
+
