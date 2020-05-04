@@ -30,7 +30,7 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: '../.travis/publish.sh'
+  script: - ./flutter/bin/flutter test
   on:
     tags: true
 cache:
