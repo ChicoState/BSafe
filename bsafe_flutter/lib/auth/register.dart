@@ -3,11 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:BSafe/shared/constants.dart';
 import 'package:BSafe/shared/loading.dart';
 
+// Unit testing classes
+
 class EmailFieldValidator {
   static String validate(String value) {
-    return value.isEmpty ? 'Email cannot be empty.' : null;
+    return value.isEmpty ? 'Email cannot be empty' : null;
   }
 }
+
+class PasswordFieldValidator {
+  static String validate(String value) {
+    if (value.isEmpty) {
+      return 'Password cannot be empty';
+    } else {
+      return value.length < 6 ? 'Enter a password that is at least 6 characters long' : null;
+    }
+  }
+}
+
+// End unit testing classes
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -88,7 +102,7 @@ class _RegisterState extends State<Register> {
                   TextFormField(
                     decoration: textInputDecoration.copyWith(hintText: 'Password'),
                     obscureText: true,
-                    validator: (val) => val.length < 6 ? 'Enter a password that is at least 6 characters long' : null,
+                    validator: PasswordFieldValidator.validate,
                     onChanged: (val) {
                       password = val;
                     },
