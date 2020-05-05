@@ -148,35 +148,36 @@ class _MyMapState extends State<MyMap> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body: SafeArea(
-          child: GoogleMap(
-            onMapCreated: onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 1.0,
-            ),
-            markers: _markers.values.toSet(),
-            onCameraMove: onCameraMove,
+      body: SafeArea(
+        child: GoogleMap(
+          onMapCreated: onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 1.0,
           ),
+          markers: _markers.values.toSet(),
+          onCameraMove: onCameraMove,
         ),
-        floatingActionButton: SpeedDial(
-          child: Icon(Icons.add),
-          backgroundColor: Colors.deepPurple,
-          children: [
-              SpeedDialChild(
-                child: Icon(Icons.directions_walk),
-                backgroundColor: Colors.deepPurpleAccent,
-                label: 'Location',
-                onTap: getLoc
-              ),
-              SpeedDialChild(
-                child: Icon(Icons.navigation),
-                backgroundColor: Colors.deepPurpleAccent,
-                label: 'Place Marker',
-                onTap: addMarker,
-              )
-          ],
-        ),
+      ),
+      floatingActionButton: SpeedDial(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.deepPurple,
+        marginRight: 60,
+        children: [
+            SpeedDialChild(
+              child: Icon(Icons.directions_walk),
+              backgroundColor: Colors.deepPurpleAccent,
+              label: 'Location',
+              onTap: getLoc
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.navigation),
+              backgroundColor: Colors.deepPurpleAccent,
+              label: 'Place Marker',
+              onTap: addMarker,
+            )
+        ],
+      ),
     );
   }
 }
