@@ -6,8 +6,6 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:geolocator/geolocator.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
 import 'package:BSafe/SecondScreen.dart';
@@ -70,8 +68,6 @@ class FourthScreen extends StatelessWidget {
 }
 
 Future<http.Response> sendPanic(String number) async {
-//  final FirebaseUser user = await FirebaseAuth.instance.currentUser();
-//  String uid = user.displayName;
   Position pos = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   String lat = pos.latitude.toString();
   String long = pos.longitude.toString();

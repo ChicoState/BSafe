@@ -12,7 +12,6 @@ class AuthService {
 
   //Auth change user stream
   //Mapping into our user
-  //Stream<FirebaseUser> get user {
   Stream<User> get user {
     return _auth.onAuthStateChanged
       //.map((FirebaseUser user) => _userFromFirebaseUser(user));'
@@ -25,7 +24,6 @@ class AuthService {
       // Wait until it's complete to assign the result to some variable
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
-      //return user;
       return _userFromFirebaseUser(user);
     } catch(e) {
       print(e.toString());

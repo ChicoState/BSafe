@@ -1,12 +1,10 @@
 // ThirdScreen.dart -- Chris / Logan
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-
 import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
 import 'package:BSafe/SecondScreen.dart';
@@ -69,7 +67,6 @@ class MyMap extends StatefulWidget {
 class _MyMapState extends State<MyMap> {
   Completer<GoogleMapController> _controller = Completer();
   final Map<String, Marker> _markers = {};
-  final Set<Marker> _markers2 = {};
   static final LatLng _center = const LatLng(39.8283, -98.5795);
    LatLng _lastposition = _center;
 
@@ -103,7 +100,6 @@ class _MyMapState extends State<MyMap> {
     var currentAddress = await getAddress(currloc);
     await moveToPosition(currloc);
     setState(() {
-      //_markers.clear();
       final marker = Marker(
         markerId: MarkerId("curr_loc"),
         position: LatLng(currloc.latitude, currloc.longitude),
@@ -126,7 +122,6 @@ class _MyMapState extends State<MyMap> {
  void addMarker() async {
     var markAddress =  await getAddlatlong(_lastposition.latitude, _lastposition.longitude);
     setState(() {
-      //_markers.clear();
       final marker = Marker(
         markerId: MarkerId("place_loc"),
         position: _lastposition,
@@ -164,18 +159,18 @@ class _MyMapState extends State<MyMap> {
         backgroundColor: Colors.deepPurple,
         marginRight: 60,
         children: [
-            SpeedDialChild(
-              child: Icon(Icons.directions_walk),
-              backgroundColor: Colors.deepPurpleAccent,
-              label: 'Location',
-              onTap: getLoc
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.navigation),
-              backgroundColor: Colors.deepPurpleAccent,
-              label: 'Place Marker',
-              onTap: addMarker,
-            )
+          SpeedDialChild(
+            child: Icon(Icons.directions_walk),
+            backgroundColor: Colors.deepPurpleAccent,
+            label: 'Location',
+            onTap: getLoc
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.navigation),
+            backgroundColor: Colors.deepPurpleAccent,
+            label: 'Place Marker',
+            onTap: addMarker,
+          )
         ],
       ),
     );

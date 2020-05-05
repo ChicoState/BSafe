@@ -1,7 +1,6 @@
 // Settingss.dart
 
 import 'package:flutter/material.dart';
-
 import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
 import 'package:BSafe/SecondScreen.dart';

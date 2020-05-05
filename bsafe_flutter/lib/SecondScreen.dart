@@ -1,13 +1,11 @@
 // SecondScreen.dart -- Samantha
 
 import 'package:flutter/material.dart';
-
 import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
 import 'package:BSafe/ThirdScreen.dart';
 import 'package:BSafe/FourthScreen.dart';
 import 'package:BSafe/Settings.dart';
-
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 

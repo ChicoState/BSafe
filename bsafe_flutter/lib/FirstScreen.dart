@@ -1,7 +1,6 @@
 // FirstScreen.dart
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:BSafe/main.dart';
 import 'package:BSafe/SecondScreen.dart';
 import 'package:BSafe/ThirdScreen.dart';
