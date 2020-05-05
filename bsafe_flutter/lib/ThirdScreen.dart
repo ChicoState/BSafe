@@ -74,7 +74,7 @@ class _MyMapState extends State<MyMap> {
    LatLng _lastposition = _center;
 
   //*** GoogleMapController Documentation: https://pub.dev/packages/google_maps_flutter
-  Future<void> _moveToPosition(Position loc) async {
+  Future<void> moveToPosition(Position loc) async {
     final GoogleMapController mapController = await _controller.future;
     if(mapController == null) return;
     //*** Move Camera to current location
@@ -87,7 +87,7 @@ class _MyMapState extends State<MyMap> {
     );
   }
   //*** Geolocation API Documentation: https://pub.dev/packages/geolocator#-readme-tab-
-  Future<String> _getAddress(Position loc) async {
+  Future<String> getAddress(Position loc) async {
     List<Placemark> placemarks = await Geolocator().placemarkFromCoordinates(loc.latitude, loc.longitude);
     if (placemarks != null && placemarks.isNotEmpty) {
       final Placemark loc = placemarks[0];
@@ -97,11 +97,11 @@ class _MyMapState extends State<MyMap> {
     }
     return "";
   }
-  void _getLoc() async {
+  void getLoc() async {
     //*** Grab Current Location of the Device
     Position currloc = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-    var currentAddress = await _getAddress(currloc);
-    await _moveToPosition(currloc);
+    var currentAddress = await getAddress(currloc);
+    await moveToPosition(currloc);
     setState(() {
       //_markers.clear();
       final marker = Marker(
@@ -113,7 +113,7 @@ class _MyMapState extends State<MyMap> {
     });
   }
 
-  Future<String> _getAddlatlong(double lat, double long) async {
+  Future<String> getAddlatlong(double lat, double long) async {
     List<Placemark> placemarks = await Geolocator().placemarkFromCoordinates(lat, long);
     if (placemarks != null && placemarks.isNotEmpty) {
       final Placemark loc = placemarks[0];
@@ -123,26 +123,26 @@ class _MyMapState extends State<MyMap> {
     }
     return "";
   }
- void _addMarker() async{
-  var markAddress =  await _getAddlatlong(_lastposition.latitude, _lastposition.longitude);
-  setState(() {
-    //_markers.clear();
-    final marker = Marker(
-      markerId: MarkerId("place_loc"),
-      position: _lastposition,
-      infoWindow: InfoWindow(title: markAddress),
-    );
-    _markers["Placed_Location"] = marker;
-  });
+ void addMarker() async {
+    var markAddress =  await getAddlatlong(_lastposition.latitude, _lastposition.longitude);
+    setState(() {
+      //_markers.clear();
+      final marker = Marker(
+        markerId: MarkerId("place_loc"),
+        position: _lastposition,
+        infoWindow: InfoWindow(title: markAddress),
+      );
+      _markers["Placed_Location"] = marker;
+    });
   }
 
-  void _onMapCreated(GoogleMapController controller) {
+  void onMapCreated(GoogleMapController controller) {
     setState(() {
       _controller.complete(controller);
     });
   }
 
-  void _onCameraMove(CameraPosition position){
+  void onCameraMove(CameraPosition position) {
     _lastposition = position.target;
   }
   @override
@@ -150,13 +150,13 @@ class _MyMapState extends State<MyMap> {
     return new Scaffold(
         body: SafeArea(
           child: GoogleMap(
-            onMapCreated: _onMapCreated,
+            onMapCreated: onMapCreated,
             initialCameraPosition: CameraPosition(
               target: _center,
               zoom: 1.0,
             ),
             markers: _markers.values.toSet(),
-            onCameraMove: _onCameraMove,
+            onCameraMove: onCameraMove,
           ),
         ),
         floatingActionButton: SpeedDial(
@@ -167,13 +167,13 @@ class _MyMapState extends State<MyMap> {
                 child: Icon(Icons.directions_walk),
                 backgroundColor: Colors.deepPurpleAccent,
                 label: 'Location',
-                onTap: _getLoc
+                onTap: getLoc
               ),
               SpeedDialChild(
                 child: Icon(Icons.navigation),
                 backgroundColor: Colors.deepPurpleAccent,
                 label: 'Place Marker',
-                onTap: _addMarker,
+                onTap: addMarker,
               )
           ],
         ),

@@ -95,7 +95,7 @@ class MyApp extends StatelessWidget {
 class PermissionsService {
   final PermissionHandler _permissionHandler = PermissionHandler();
 
- Future<bool> _requestPermission(PermissionGroup permission) async {
+ Future<bool> requestPermission(PermissionGroup permission) async {
     var result = await _permissionHandler.requestPermissions([permission]);
     if (result[permission] == PermissionStatus.granted) {
       return true;
@@ -104,7 +104,7 @@ class PermissionsService {
   }
 
   Future<bool> requestContactsPerm({Function onPermissionDenied}) async {
-    var granted = await _requestPermission(PermissionGroup.contacts);
+    var granted = await requestPermission(PermissionGroup.contacts);
     if (!granted) {
       onPermissionDenied();
     }
@@ -113,11 +113,11 @@ class PermissionsService {
 
   // Permission for contacts
   Future<bool> requestContactsPermission() async {
-    return _requestPermission(PermissionGroup.contacts);
+    return requestPermission(PermissionGroup.contacts);
   }
   // Permission for location
   Future<bool> requestLocationPermission() async {
-    return _requestPermission(PermissionGroup.locationWhenInUse);
+    return requestPermission(PermissionGroup.locationWhenInUse);
   }
 }
 //
