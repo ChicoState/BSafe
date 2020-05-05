@@ -48,8 +48,8 @@ class FourthScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Column(children: <Widget>[
-            panicButton(),
-            panicButtonUsingContacts(),
+            PanicButton(),
+            PanicButtonUsingContacts(),
             ]
           )
         ),
@@ -92,7 +92,7 @@ Future<http.Response> sendPanic(String number) async {
   );
 }
 
-class panicButton extends FourthScreen {
+class PanicButton extends FourthScreen {
   final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -125,7 +125,7 @@ class panicButton extends FourthScreen {
 }
 
 // add lat and long with google maps, using 13a
-class panicButtonUsingContacts extends FourthScreen {
+class PanicButtonUsingContacts extends FourthScreen {
   @override
   Widget build(BuildContext context) {
     return Column(
