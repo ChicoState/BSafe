@@ -7,11 +7,23 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:BSafe/main.dart';
+import 'package:flutter/material.dart';
 
 void main() {
 
-  testWidgets('app should work', (tester) async {
+  testWidgets('verify panic button', (tester) async {
     await tester.pumpWidget(new MyApp());
     expect(find.text('I don\'t feel safe'), findsOneWidget);
   });
+
+  testWidgets('verify logout icon is present', (tester) async {
+    await tester.pumpWidget(new MyApp());
+    expect(find.byIcon(Icons.person), findsOneWidget);
+  });
+
+  testWidgets('verify settings icon is present', (tester) async {
+    await tester.pumpWidget(new MyApp());
+    expect(find.byIcon(Icons.settings), findsOneWidget);
+  });
+
 }

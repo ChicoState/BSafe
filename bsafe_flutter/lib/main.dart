@@ -148,7 +148,7 @@ class _MyHomePage extends State<MyHomePage> {
               onPressed: () async {
                 await _auth.signOut();
               }, 
-              icon: Icon(Icons.person), 
+              icon: Icon(Icons.person),
               label: Text('Logout')
             ),
             IconButton(

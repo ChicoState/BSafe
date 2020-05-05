@@ -8,6 +8,7 @@ import 'package:BSafe/FourthScreen.dart';
 import 'package:BSafe/Settings.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:BSafe/shared/loading.dart';
 
 class ContactsPage extends StatefulWidget {
   @override
@@ -21,6 +22,8 @@ class _ContactsState extends State<ContactsPage> {
   List filteredNames = new List();
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text( 'Contacts' );
+
+  bool loading = false;
 
   List<Contact> _contacts;
 
@@ -46,7 +49,7 @@ class _ContactsState extends State<ContactsPage> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       appBar: _buildBar(context),
       body: Container(
         child: _buildList(),
