@@ -9,8 +9,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:BSafe/main.dart';
 
 void main() {
+
   testWidgets('app should work', (tester) async {
     await tester.pumpWidget(new MyApp());
-    expect(find.text('Main Page'), findsOneWidget);
+    expect(find.text('I don\'t feel safe'), findsOneWidget);
   });
 }
