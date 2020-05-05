@@ -1,0 +1,38 @@
+# Automatically generated on 2020-05-05 UTC from https://codemagic.io/app/5eb03bb8fe0b7b00174be397/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  default-workflow:
+    name: Default Workflow
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - |
+        # set up debug keystore
+        rm -f ~/.android/debug.keystore
+        keytool -genkeypair \
+          -alias androiddebugkey \
+          -keypass android \
+          -keystore ~/.android/debug.keystore \
+          -storepass android \
+          -dname 'CN=Android Debug,O=Android,C=US' \
+          -keyalg 'RSA' \
+          -keysize 2048 \
+          -validity 10000
+      - |
+        # set up local properties
+        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/bsafe_flutter/android/local.properties"
+      - cd bsafe_flutter && flutter packages pub get
+      - cd bsafe_flutter && flutter test
+      - cd bsafe_flutter && flutter build apk --debug
+    artifacts:
+      - bsafe_flutter/build/**/outputs/**/*.apk
+      - bsafe_flutter/build/**/outputs/**/*.aab
+      - bsafe_flutter/build/**/outputs/**/mapping.txt
+      - bsafe_flutter/flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - ssmathistad@mail.csuchico.edu

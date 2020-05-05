@@ -2,6 +2,12 @@ import 'package:BSafe/models/user.dart';
 import 'package:BSafe/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+class FirebaseValidator {
+  static User validateUser(FirebaseUser user) {
+    return user != null ? User(uid: user.uid) : null;
+  }
+}
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
