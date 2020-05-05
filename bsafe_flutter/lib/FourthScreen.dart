@@ -1,10 +1,12 @@
-// FourthScreen.dart -- Brendon
+// FourthScreen.dart
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:geolocator/geolocator.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:BSafe/main.dart';
 import 'package:BSafe/FirstScreen.dart';
@@ -16,6 +18,7 @@ class FourthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text("Messaging"),
         actions: <Widget> [
@@ -66,7 +69,17 @@ class FourthScreen extends StatelessWidget {
   }
 }
 
-Future<http.Response> sendPanic(String number) {
+Future<http.Response> sendPanic(String number) async {
+//  final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+//  String uid = user.displayName;
+  Position pos = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  String lat = pos.latitude.toString();
+  String long = pos.longitude.toString();
+  String res =
+      "This is a test of the BSafe panic button feature\n"
+      "Users last known location is:\n"
+      "https://www.google.com/maps/dir//" + lat + "," + long;
+  print("For Debug: sending POST request");
   return http.post(
     'http://35.239.59.44:9090/text',
     headers: <String, String>{
@@ -74,7 +87,7 @@ Future<http.Response> sendPanic(String number) {
     },
     body: jsonEncode(<String, String>{
       'number': number,
-      'message': "this is a test of the panic button feature"
+      'message': res
     }),
   );
 }
@@ -91,10 +104,17 @@ class panicButton extends FourthScreen {
           child: TextField(
             controller: _controller,
             decoration: InputDecoration(hintText: 'Enter phone number'),
+              keyboardType: TextInputType.number
           ),
         ),
         RaisedButton(
-          child: Text('Send Panic Message'),
+          color: Colors.deepPurple,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25)),
+          child: Text('Send Panic Message',
+              style: TextStyle(
+                color: Colors.white,)
+          ),
           onPressed: () {
             sendPanic(_controller.text);
           },
@@ -104,6 +124,7 @@ class panicButton extends FourthScreen {
   }
 }
 
+// add lat and long with google maps, using 13a
 class panicButtonUsingContacts extends FourthScreen {
   @override
   Widget build(BuildContext context) {
@@ -111,7 +132,13 @@ class panicButtonUsingContacts extends FourthScreen {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         RaisedButton(
-          child: Text('Send Panic Message Using Contacts'),
+          color: Colors.deepPurple,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25)),
+          child: Text('Send Panic Message Using Contacts',
+              style: TextStyle(
+                color: Colors.white,)
+          ),
           onPressed: () {
             sendPanicToContacts();
           },

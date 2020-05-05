@@ -1,8 +1,5 @@
-// FirstScreen.dart -- Samantha
-
+// FirstScreen.dart
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'dart:math' as math;
 import 'dart:async';
 
 import 'package:BSafe/main.dart';
@@ -59,224 +56,10 @@ class FirstScreen extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int counter = 0;
-  Position pos;
-  String lat = "1st";
-  String long = "2nd";
-
-  //*** Asynchronous function that gets your geoposition and stores it into lat and long variables
-  Future<Position>  getPos() async {
-    pos = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    lat = pos.latitude.toString();
-    long = pos.longitude.toString();
-
-    return pos;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Samantha\'s Page: Your geolocation is:',
-            ),
-            Text(
-              'Lat: $lat \nLong: $long',
-              style: Theme.of(context).textTheme.headline,
-            ),
-            Text(
-              'You\'ve requested your location $counter times.',
-            ),
-          ],
-        ),
-      ),
-      //
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Container(
-          height: 50.0,
-        ),
-      ),
-      //
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepPurple,
-        onPressed: () => setState(() {
-          getPos();
-          counter++;
-        }),
-        tooltip: 'Geolocation',
-        child: Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, //*** Centers the action button to the bottom-center
-    );
-  }
-}
-
-class MyTimer extends StatefulWidget {
-  @override
-  MyAppState createState() => MyAppState();
-}
-
-class MyAppState extends State<MyTimer> with TickerProviderStateMixin {
-  AnimationController controller;
-
-  String get timerString {
-    Duration duration = controller.duration * controller.value;
-    return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 10),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.center,
-                child: AspectRatio(
-                  aspectRatio: 1.0,
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned.fill(
-                        child: AnimatedBuilder(
-                          animation: controller,
-                          builder: (BuildContext context, Widget child) {
-                            return CustomPaint(
-                                painter: TimerPainter(
-                                  animation: controller,
-                                  backgroundColor: Colors.white,
-                                  color: themeData.indicatorColor,
-                                ));
-                          },
-                        ),
-                      ),
-                      Align(
-                        alignment: FractionalOffset.center,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "Count Down",
-                              style: themeData.textTheme.subhead,
-                            ),
-                            AnimatedBuilder(
-                                animation: controller,
-                                builder: (BuildContext context, Widget child) {
-                                  return Text(
-                                    timerString,
-                                    style: themeData.textTheme.display4,
-                                  );
-                                }),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  FloatingActionButton(
-                    child: AnimatedBuilder(
-                      animation: controller,
-                      builder: (BuildContext context, Widget child) {
-                        return Icon(controller.isAnimating
-                            ? Icons.pause
-                            : Icons.play_arrow);
-                      },
-                    ),
-                    onPressed: () {
-                      // setState(() => isPlaying = !isPlaying);
-
-                      if (controller.isAnimating) {
-                        controller.stop(canceled: true);
-                      } else {
-                        controller.reverse(
-                            from: controller.value == 0.0
-                                ? 1.0
-                                : controller.value);
-                      }
-                    },
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TimerPainter extends CustomPainter {
-  TimerPainter({
-    this.animation,
-    this.backgroundColor,
-    this.color,
-  }) : super(repaint: animation);
-
-  final Animation<double> animation;
-  final Color backgroundColor, color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = backgroundColor
-      ..strokeWidth = 5.0
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
-
-    canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
-    paint.color = color;
-    double progress = (1.0 - animation.value) * 2 * math.pi;
-    canvas.drawArc(Offset.zero & size, math.pi * 1.5, -progress, false, paint);
-  }
-
-  @override
-  bool shouldRepaint(TimerPainter old) {
-    return animation.value != old.animation.value ||
-        color != old.color ||
-        backgroundColor != old.backgroundColor;
-  }
-}
-
-
-
 class TimerApp extends StatefulWidget {
   @override
   _TimerAppState createState() => _TimerAppState();
 }
-
 
 class _TimerAppState extends State<TimerApp> {
   static const duration = const Duration(seconds: 1);
@@ -293,17 +76,22 @@ class _TimerAppState extends State<TimerApp> {
       });
       if (secondsPassed == 0){
         sendPanicToContacts();
+        setState(() {
+          isActive = false;
+        });
       }
     }
   }
 
-  void setTime(String time){
+  void setTime(String hours,String minutes,String seconds){
     setState(() {
-      secondsPassed = int.parse(time);
+      secondsPassed = int.parse(hours)*3600 + int.parse(minutes)*60 + int.parse(seconds);
     });
   }
 
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _hours = TextEditingController();
+  final TextEditingController _minutes = TextEditingController();
+  final TextEditingController _seconds = TextEditingController();
   @override
   Widget build(BuildContext context) {
     if (timer == null) {
@@ -312,28 +100,65 @@ class _TimerAppState extends State<TimerApp> {
       });
     }
     int seconds = secondsPassed % 60;
-    int minutes = secondsPassed ~/ 60;
+    int minutes = (secondsPassed ~/ 60) % 60;
     int hours = secondsPassed ~/ (60 * 60);
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+          resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.white,
           body: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: TextField(
-                    controller: _controller,
-                    decoration: InputDecoration(hintText: 'seconds'),
-                  ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Flexible(
+                      child: new TextField(
+                          controller: _hours,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              hintText: 'Hours',
+                              contentPadding: EdgeInsets.all(10)
+                          )
+                      ),
+                    ),
+                    SizedBox(width: 20.0,),
+                    new Flexible(
+                      child: new TextField(
+                          controller: _minutes,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              hintText: 'Minutes',
+                              contentPadding: EdgeInsets.all(10)
+                          )
+                      ),
+                    ),
+                    SizedBox(width: 20.0,),
+                    new Flexible(
+                      child: new TextField(
+                          controller: _seconds,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              hintText: 'Seconds',
+                              contentPadding: EdgeInsets.all(10)
+                          )
+                      ),
+                    ),
+                  ],
                 ),
                 RaisedButton(
-                  child: Text('update timer'),
+                    color: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    child: Text('Update Panic Timer',
+                        style: TextStyle(
+                          color: Colors.white,)
+                    ),
                   onPressed: () {
-                    setTime(_controller.text);
+                    setTime(_hours.text,_minutes.text,_seconds.text);
                   },
                 ),
                 Row(
@@ -351,14 +176,15 @@ class _TimerAppState extends State<TimerApp> {
                 ),
                 SizedBox(height: 60),
                 Container(
-                  width: 200,
-                  height: 47,
-                  margin: EdgeInsets.only(top: 30),
+                  margin: EdgeInsets.only(top: 10),
                   child: RaisedButton(
-                    color: Colors.deepPurple[50],
+                    color: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)),
-                    child: Text(isActive ? 'STOP' : 'START'),
+                    child: Text(isActive ? 'STOP' : 'START',
+                      style: TextStyle(
+                        color: Colors.white,)
+                    ),
                     onPressed: () {
                       setState(() {
                         isActive = !isActive;
@@ -399,7 +225,7 @@ class LabelText extends StatelessWidget {
           Text(
             '$label',
             style: TextStyle(
-              color: Colors.white70,
+              color: Colors.white,
             ),
           ),
         ],

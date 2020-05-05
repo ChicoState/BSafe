@@ -170,7 +170,18 @@ class _MyHomePage extends State<MyHomePage> {
         ),
       body: SafeArea(
         child: Center(
-        child: Text('Main Page')
+        child: RaisedButton(
+          color: Colors.deepPurple,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25)),
+          child: Text("I don't feel safe",
+              style: TextStyle(
+                color: Colors.white,)
+          ),
+          onPressed: () {
+            sendPanicToContacts();
+          },
+        ),
         ),
       ),
       drawer: Drawer(
