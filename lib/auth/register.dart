@@ -13,11 +13,7 @@ class EmailFieldValidator {
 
 class PasswordFieldValidator {
   static String validate(String value) {
-    if (value.isEmpty) {
-      return 'Password cannot be empty';
-    } else {
-      return value.length < 6 ? 'Enter a password that is at least 6 characters long' : null;
-    }
+    return value.isEmpty ? 'Password cannot be empty' : (value.length < 6 ? 'Enter a password that is at least 6 characters long' : null);
   }
 }
 
@@ -71,16 +67,7 @@ class _RegisterState extends State<Register> {
               onPressed: () async {
                 //Dynamic because it could be null or a Firebase user
                 //Attempts to signin and waits for this to resolve
-                dynamic result = await _auth.signInAnon();
-
-                if (result == null) {
-                  print('Error registering');
-                } else {
-                  //Received user object
-                  print('Registered');
-                  //print(result);
-                  print(result.uid);
-                }
+                await _auth.signInAnon();
               }
             ),
             Form(
