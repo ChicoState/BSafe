@@ -11,9 +11,14 @@ import 'package:flutter/material.dart';
 
 void main() {
 
-  testWidgets('verify panic button', (tester) async {
+  testWidgets('verify panic button text', (tester) async {
     await tester.pumpWidget(new MyApp());
     expect(find.text('I don\'t feel safe'), findsOneWidget);
+  });
+
+  testWidgets('verify panic button', (tester) async {
+    await tester.pumpWidget(new MyApp());
+    expect(find.byType(RaisedButton), findsOneWidget);
   });
 
   testWidgets('verify logout icon is present', (tester) async {
