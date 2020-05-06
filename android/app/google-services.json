@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1023989956340",
+    "firebase_url": "https://bsafe-ba8a5.firebaseio.com",
+    "project_id": "bsafe-ba8a5",
+    "storage_bucket": "bsafe-ba8a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023989956340:android:e23a5146e7e0aa0772a8a1",
+        "android_client_info": {
+          "package_name": "com.example.bsafe_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023989956340-5df8i87148hd21mrtmfnq4orhoivh1cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5mSymBoWZfT5O9A_m57isePlfRh-BoIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023989956340-5df8i87148hd21mrtmfnq4orhoivh1cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
