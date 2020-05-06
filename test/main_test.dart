@@ -26,4 +26,9 @@ void main() {
     expect(find.byIcon(Icons.settings), findsOneWidget);
   });
 
+  testWidgets('verify title', (tester) async {
+    await tester.pumpWidget(new MyApp());
+    expect(find.text('BSafe'), findsOneWidget);
+  });
+
 }
