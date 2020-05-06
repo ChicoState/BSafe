@@ -11,12 +11,7 @@ class Wrapper extends StatelessWidget {
     //Accesing each time there is a new user value
     final user = Provider.of<User>(context);
     
-    //User needs to authenticate
-    if (user == null) {
-      return Authenticate();
-    //Have a valid user
-    } else {
-      return MyApp();
-    }
+    // Check valid user
+    return (user == null) ? Authenticate() : MyApp();
   }
 }
