@@ -116,6 +116,7 @@ class _TimerAppState extends State<TimerApp> {
                   children: <Widget>[
                     new Flexible(
                       child: new TextField(
+                          textAlign: TextAlign.center,
                           controller: _hours,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -127,6 +128,7 @@ class _TimerAppState extends State<TimerApp> {
                     SizedBox(width: 20.0,),
                     new Flexible(
                       child: new TextField(
+                          textAlign: TextAlign.center,
                           controller: _minutes,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -138,6 +140,7 @@ class _TimerAppState extends State<TimerApp> {
                     SizedBox(width: 20.0,),
                     new Flexible(
                       child: new TextField(
+                          textAlign: TextAlign.center,
                           controller: _seconds,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -164,7 +167,8 @@ class _TimerAppState extends State<TimerApp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     LabelText(
-                        label: 'HRS', value: hours.toString().padLeft(2, '0')),
+                        label: 'HRS', 
+                        value: hours.toString().padLeft(2, '0')),
                     LabelText(
                         label: 'MIN',
                         value: minutes.toString().padLeft(2, '0')),
