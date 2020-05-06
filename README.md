@@ -8,7 +8,7 @@ Core flutter app for BSafe
 
 [![Coverage Status](https://coveralls.io/repos/github/ChicoState/BSafe/badge.svg?branch=master)](https://coveralls.io/github/ChicoState/BSafe?branch=master)
 
-[![Website https://35.239.59.44:9090](https://35.239.59.44:9090)](https://35.239.59.44:9090)
+[![Website shields.io](https://35.239.59.44:9090)](https://35.239.59.44:9090)
 
 
 ## Developers
