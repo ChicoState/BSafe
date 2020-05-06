@@ -9,7 +9,6 @@ install:
   - ./flutter/bin/flutter doctor
   - gem install coveralls-lcov
 script:
-  - cd bsafe_flutter
   - ./flutter/bin/flutter test --coverage
 after_success:
   - coveralls-lcov coverage/lcov.info
