@@ -11,9 +11,5 @@ import 'package:flutter/material.dart';
 
 void main() {
 
-  testWidgets('verify registration text', (tester) async {
-    await tester.pumpWidget(new Register());
-    expect(find.text('Register to BSafe'), findsOneWidget);
-  });
 
 }
