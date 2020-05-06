@@ -3,14 +3,11 @@ import 'package:BSafe/models/user.dart';
 import 'package:BSafe/services/auth_verify.dart';
 import 'package:BSafe/wrapper.dart';
 import 'package:flutter/material.dart';
-
-// IMPORT NEW SCREENS HERE
 import 'package:BSafe/FirstScreen.dart';
 import 'package:BSafe/SecondScreen.dart';
 import 'package:BSafe/ThirdScreen.dart';
 import 'package:BSafe/FourthScreen.dart';
 import 'package:BSafe/Settings.dart';
-
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -65,6 +62,7 @@ class _StartingState extends State<Starting> {
   }
 }
 
+
 class MyApp extends StatelessWidget {
   final appTitle = "BSafe";
 
@@ -92,16 +90,13 @@ class PermissionsService {
 
  Future<bool> requestPermission(PermissionGroup permission) async {
     var result = await _permissionHandler.requestPermissions([permission]);
-    if (result[permission] == PermissionStatus.granted) {
-      return true;
-    }
-    return false;
+    return result[permission] == PermissionStatus.granted ? true : false;
   }
 
   Future<bool> requestContactsPerm({Function onPermissionDenied}) async {
     var granted = await requestPermission(PermissionGroup.contacts);
     if (!granted) {
-      onPermissionDenied();
+      return onPermissionDenied();
     }
     return granted;
   }
@@ -115,7 +110,6 @@ class PermissionsService {
     return requestPermission(PermissionGroup.locationWhenInUse);
   }
 }
-//
 
 
 class MyHomePage extends StatefulWidget {
