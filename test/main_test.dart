@@ -37,4 +37,13 @@ void main() {
     find.byIcon(Icons.arrow_right);
   });
 
+  testWidgets('Verify transition to register page', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      home: Register(),
+    ));
+
+    expect(find.text('Sign in anonymously'), findsOneWidget);
+  });
+
 }
