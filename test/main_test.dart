@@ -9,6 +9,7 @@ import 'package:BSafe/auth/register.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:BSafe/main.dart';
 import 'package:flutter/material.dart';
+import '../lib/auth/signin.dart';
 
 void main() {
 
@@ -41,6 +42,15 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Register(),
+    ));
+
+    expect(find.text('Sign in anonymously'), findsOneWidget);
+  });
+
+  testWidgets('Verify transition to signin page', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      home: SignIn(),
     ));
 
     expect(find.text('Sign in anonymously'), findsOneWidget);
