@@ -13,7 +13,7 @@ void main() {
     expect(find.text('Settings'), findsWidgets);
   }); 
 
-  testWidgets('Verify homepage traversal', (WidgetTester tester) async {
+  testWidgets('Verify homepage traversal from Settings', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Settings(),
