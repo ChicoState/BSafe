@@ -49,15 +49,15 @@ void main() {
     expect(find.text('BSafe'), findsOneWidget);
   });
 
-  testWidgets('Verify homepage traversal from Main', (WidgetTester tester) async {
+  testWidgets('Verify Settings traversal from MyApp', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
-      home: Settings(),
+      home: MyApp(),
     ));
 
-    await tester.tap(find.byIcon(Icons.home));
+    await tester.tap(find.byIcon(Icons.settings));
     await tester.pumpAndSettle();
-    expect(find.text('I don\'t feel safe'), findsWidgets);
+    expect(find.text('Settings'), findsWidgets);
   }); 
 
 }
