@@ -21,7 +21,7 @@ void main() {
 
     await tester.tap(find.byIcon(Icons.home));
     await tester.pumpAndSettle();
-    expect(find.text('I don\'t feel safe'), findsWidgets);
+    expect(find.text('I don\'t feel safe'), findsOneWidget);
   }); 
 
 }

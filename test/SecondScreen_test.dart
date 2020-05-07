@@ -18,7 +18,7 @@ void main() {
   testWidgets('Verify MyApp traversal from SecondScreen', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
-      home: Settings(),
+      home: SecondScreen(),
     ));
 
     await tester.tap(find.byIcon(Icons.home));
@@ -29,12 +29,21 @@ void main() {
   testWidgets('Verify Settings traversal from SecondScreen', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
-      home: MyApp(),
+      home: SecondScreen(),
     ));
 
     await tester.tap(find.byIcon(Icons.settings));
     await tester.pumpAndSettle();
     expect(find.text('Settings'), findsWidgets);
   }); 
+
+  testWidgets('Verify search icon on SecondScreen', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      home: ContactsPage(),
+    ));
+
+    expect(find.byIcon(Icons.search), findsOneWidget);
+  });
 
 }
