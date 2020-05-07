@@ -29,4 +29,22 @@ void main() {
     find.byIcon(Icons.arrow_right);
   });
 
+  testWidgets('Verify app starting framework', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      home: Starting(),
+    ));
+
+    expect(find.text('Sign in anonymously'), findsOneWidget);
+  });  
+
+  testWidgets('Verify myapp framework', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      home: MyApp(),
+    ));
+
+    expect(find.text('BSafe'), findsOneWidget);
+  }); 
+
 }
