@@ -13,4 +13,15 @@ void main() {
     expect(find.text('Settings'), findsWidgets);
   }); 
 
+  testWidgets('Verify homepage traversal', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      home: Settings(),
+    ));
+
+    await tester.tap(find.byIcon(Icons.home));
+    await tester.pumpAndSettle();
+    expect(find.text('I don\'t feel safe'), findsWidgets);
+  }); 
+
 }
