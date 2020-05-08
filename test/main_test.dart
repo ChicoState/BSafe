@@ -53,6 +53,15 @@ void main() {
     await tester.tap(find.byIcon(Icons.settings));
     await tester.pumpAndSettle();
     expect(find.text('Settings'), findsWidgets);
+  });
+
+
+  testWidgets('Verify custom Drawer framework', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: DrawerItem(),
+    ));
+
+    expect(find.byIcon(Icons.arrow_right), findsWidgets);
   }); 
 
   testWidgets('Verify swapping to registration', (WidgetTester tester) async {
