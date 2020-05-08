@@ -11,7 +11,7 @@ install:
 script:
   - ./flutter/bin/flutter test --coverage
 after_success:
-  - coveralls-lcov coverage/lcov.info --exclude lib/shared/constants.dart
+  - coveralls-lcov coverage/lcov.info
 cache:
   directories:
     - $HOME/.pub-cache
