@@ -56,19 +56,16 @@ void main() {
   }); 
 
   testWidgets('Verify swapping to registration', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Starting(),
     ));
 
-    //expect(find.text('Register'), findsOneWidget);
     await tester.tap(find.text('Register'));
     await tester.pumpAndSettle();
     expect(find.text('Sign in'), findsOneWidget);
   });
 
   testWidgets('Verify swapping between signin and registration', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Starting(),
     ));
@@ -81,7 +78,6 @@ void main() {
   });
 
   testWidgets('Sign in button', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Starting(),
     ));
@@ -90,7 +86,28 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Email cannot be empty'), findsOneWidget);
-    //expect(find.text('Sign in'), findsOneWidget);
+  });
+
+  testWidgets('Sign in button - no email message', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: Starting(),
+    ));
+
+    await tester.tap(find.text('Sign in'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Email cannot be empty'), findsOneWidget);
+  });
+
+  testWidgets('Sign in button - no password message', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: Starting(),
+    ));
+
+    await tester.tap(find.text('Sign in'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Password cannot be empty'), findsOneWidget);
   });
 
 }
