@@ -23,18 +23,4 @@ void main() {
     expect(find.text('Register'), findsOneWidget);
   });
 
-  testWidgets('Verify swapping between signin and registration', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MaterialApp(
-      home: Starting(),
-    ));
-
-    //expect(find.text('Register'), findsOneWidget);
-    await tester.tap(find.text('Register'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Sign in'));
-    await tester.pumpAndSettle();
-    expect(find.text('Register'), findsOneWidget);
-  });
-
 }
