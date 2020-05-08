@@ -5,7 +5,6 @@ import '../lib/Settings.dart';
 void main() {
   
   testWidgets('Verify Settings framework', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Settings(),
     ));
@@ -14,7 +13,6 @@ void main() {
   }); 
 
   testWidgets('Verify MyApp traversal from Settings', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Settings(),
     ));

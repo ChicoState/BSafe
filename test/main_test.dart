@@ -2,8 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:BSafe/main.dart';
 import 'package:flutter/material.dart';
 
-import '../lib/Settings.dart';
-
 void main() {
 
   testWidgets('verify panic button and text', (tester) async {
@@ -32,7 +30,6 @@ void main() {
   });
 
   testWidgets('Verify app Starting framework', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Starting(),
     ));
@@ -41,7 +38,6 @@ void main() {
   });  
 
   testWidgets('Verify MyApp framework', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: MyApp(),
     ));
@@ -50,7 +46,6 @@ void main() {
   });
 
   testWidgets('Verify Settings traversal from MyApp', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: MyApp(),
     ));
