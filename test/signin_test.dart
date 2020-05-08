@@ -4,7 +4,7 @@ import '../lib/auth/signin.dart';
 
 void main() {
 
-  testWidgets('Verify transition to register page', (WidgetTester tester) async {
+  testWidgets('Verify transition to signin page', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: SignIn(),

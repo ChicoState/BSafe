@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import '../lib/auth/auth.dart';
-import '../lib/main.dart';
 
 void main() {
 

@@ -73,12 +73,24 @@ void main() {
       home: Starting(),
     ));
 
-    //expect(find.text('Register'), findsOneWidget);
     await tester.tap(find.text('Register'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();
     expect(find.text('Register'), findsOneWidget);
+  });
+
+  testWidgets('Sign in button', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      home: Starting(),
+    ));
+
+    await tester.tap(find.text('Sign in'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Email cannot be empty'), findsOneWidget);
+    //expect(find.text('Sign in'), findsOneWidget);
   });
 
 }
