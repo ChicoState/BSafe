@@ -2,6 +2,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:BSafe/main.dart';
 import 'package:flutter/material.dart';
 
+import '../lib/auth/auth.dart';
+import '../lib/wrapper.dart';
+
+import 'package:BSafe/services/auth_verify.dart';
+import 'package:BSafe/shared/constants.dart';
+import 'package:BSafe/shared/loading.dart';
+import 'package:BSafe/auth/register.dart';
+
+
 void main() {
 
   testWidgets('verify panic button and text', (tester) async {
@@ -34,7 +43,7 @@ void main() {
       home: Starting(),
     ));
 
-    expect(find.text('Sign in anonymously'), findsOneWidget);
+    expect(find.widgetWithText(RaisedButton, 'Sign in anonymously'), findsOneWidget);
   });  
 
   testWidgets('Verify MyApp framework', (WidgetTester tester) async {
@@ -54,15 +63,6 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Settings'), findsWidgets);
   });
-
-
-  testWidgets('Verify custom Drawer framework', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: DrawerItem(),
-    ));
-
-    expect(find.byIcon(Icons.arrow_right), findsWidgets);
-  }); 
 
   testWidgets('Verify swapping to registration', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
