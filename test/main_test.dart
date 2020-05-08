@@ -110,4 +110,30 @@ void main() {
     expect(find.text('Password cannot be empty'), findsOneWidget);
   });
 
+  testWidgets('Register button - no email message', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: Starting(),
+    ));
+
+    await tester.tap(find.text('Register'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Register'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Password cannot be empty'), findsOneWidget);
+  });
+
+  testWidgets('Register button - no password message', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: Starting(),
+    ));
+
+    await tester.tap(find.text('Register'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Register'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Email cannot be empty'), findsOneWidget);
+  });
+
 }
