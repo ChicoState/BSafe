@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import '../lib/auth/auth.dart';
+import '../lib/main.dart';
 
 void main() {
 
@@ -25,7 +26,7 @@ void main() {
   testWidgets('Verify swapping between signin and registration', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
-      home: Authenticate(),
+      home: Starting(),
     ));
 
     //expect(find.text('Register'), findsOneWidget);
