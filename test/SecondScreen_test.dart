@@ -2,8 +2,6 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import '../lib/SecondScreen.dart';
-import '../lib/Settings.dart';
-import '../lib/main.dart';
 
 void main() {
 
@@ -51,6 +49,28 @@ void main() {
     await tester.tap(find.byIcon(Icons.search));
     await tester.pump();
     expect(find.text('Search...'), findsOneWidget);
+  });
+
+    testWidgets('Verify searchbox text check - search without content', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: ContactsPage(),
+    ));
+
+    await tester.tap(find.byIcon(Icons.search));
+    await tester.pump();
+    expect(find.text(''), findsOneWidget);
+  });
+
+  testWidgets('Verify searchbox text check - search with content', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: ContactsPage(),
+    ));
+
+    await tester.tap(find.byIcon(Icons.search));
+    await tester.pump();
+    await tester.enterText(find.byType(TextField), 'Hello');
+    await tester.pump();
+    expect(find.text('Hello'), findsOneWidget);
   });
 
 }
