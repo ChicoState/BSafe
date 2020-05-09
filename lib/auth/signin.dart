@@ -61,7 +61,7 @@ class _SignInState extends State<SignIn> {
                   SizedBox(height: 20),
                   TextFormField(
                     decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                    validator: EmailFieldValidator.validate,
+                    validator: EmailFieldValidator.validateEmail,
                     onChanged: (val) {
                       email = val;
                     },
@@ -70,7 +70,7 @@ class _SignInState extends State<SignIn> {
                   TextFormField(
                     decoration: textInputDecoration.copyWith(hintText: 'Password'),
                     obscureText: true,
-                    validator: PasswordFieldValidator.validate,
+                    validator: PasswordFieldValidator.validatePassword,
                     onChanged: (val) {
                       password = val;
                     },

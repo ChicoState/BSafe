@@ -6,13 +6,13 @@ import 'package:BSafe/shared/loading.dart';
 // Unit testing classes
 
 class EmailFieldValidator {
-  static String validate(String value) {
+  static String validateEmail(String value) {
     return value.isEmpty ? 'Email cannot be empty' : null;
   }
 }
 
 class PasswordFieldValidator {
-  static String validate(String value) {
+  static String validatePassword(String value) {
     return value.isEmpty ? 'Password cannot be empty' : (value.length < 6 ? 'Enter a password that is at least 6 characters long' : null);
   }
 }
@@ -77,7 +77,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 20),
                   TextFormField(
                     decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                    validator: EmailFieldValidator.validate,
+                    validator: EmailFieldValidator.validateEmail,
                     onChanged: (val) {
                       email = val;
                     },
@@ -86,7 +86,7 @@ class _RegisterState extends State<Register> {
                   TextFormField(
                     decoration: textInputDecoration.copyWith(hintText: 'Password'),
                     obscureText: true,
-                    validator: PasswordFieldValidator.validate,
+                    validator: PasswordFieldValidator.validatePassword,
                     onChanged: (val) {
                       password = val;
                     },
