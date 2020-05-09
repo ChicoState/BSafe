@@ -2,15 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:BSafe/main.dart';
 import 'package:flutter/material.dart';
 
-import '../lib/auth/auth.dart';
-import '../lib/wrapper.dart';
-
-import 'package:BSafe/services/auth_verify.dart';
-import 'package:BSafe/shared/constants.dart';
-import 'package:BSafe/shared/loading.dart';
-import 'package:BSafe/auth/register.dart';
-
-
 void main() {
 
   testWidgets('verify panic button and text', (tester) async {
