@@ -136,4 +136,15 @@ void main() {
     expect(find.text('Email cannot be empty'), findsOneWidget);
   });
 
+  testWidgets('Test onPressed for Home Panic Button', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: MyApp(),
+    ));
+
+    await tester.tap(find.byType(RaisedButton));
+    await tester.pumpAndSettle();
+    expect(find.text('I don\'t feel safe'), findsWidgets);
+  });
+
+
 }
