@@ -66,16 +66,19 @@ class FourthScreen extends StatelessWidget {
     );
   }
 }
-
-Future<http.Response> sendPanic(String number) async {
+Future<void> sendPanic(String number) async {
   Position pos = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   String lat = pos.latitude.toString();
   String long = pos.longitude.toString();
+  sendPanicHelper(number, lat, long);
+}
+
+Future<http.Response> sendPanicHelper(String number, String lat, String long) async {
   String res =
       "This is a test of the BSafe panic button feature\n"
       "Users last known location is:\n"
       "https://www.google.com/maps/dir//" + lat + "," + long;
-  print("For Debug: sending POST request");
+//  print("For Debug: sending POST request");
   return http.post(
     'http://35.239.59.44:9090/text',
     headers: <String, String>{
