@@ -87,10 +87,10 @@ void main(){
     expect(find.byIcon(Icons.timer), findsWidgets);
   });
 
-//  test('Test Post Request',() async {
-//    http.Response res = await sendPanic("4159711087");
-//    expect(res.statusCode,200);
-//  });
+  test('Test Post Request',() async {
+    http.Response res = await sendPanicHelper("4159711087","test","test");
+    expect(res.statusCode,400);
+  });
 
 
   testWidgets('Test homepage', (WidgetTester tester) async {
