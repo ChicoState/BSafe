@@ -10,7 +10,6 @@
 
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/35.239.59.44:9090)](https://35.239.59.44:9090)
 
-
 ## Developers
 
  - Christopher Allison: https://github.com/callison98
