@@ -1,1 +1,15 @@
 
+Command to use: 
+curl -X POST http://35.239.59.44:9090/text -d number=XXXXXXXXXX -d "message=xxxxxxxxx”
+
+How it works
+	Incoming messages are directed to a node server, the server sends an email using nodemailer and uses already existing email paths that allow for emails to be sent to phone numbers on most carriers. The messages are sent from BSafeChico@gmail.com.
+	In our application, the message configuration is done client side in the app because we only have one message template that gets sent. If we wanted to add more advanced messages we could use the message field in the curl command to choose a template server side.
+
+
+Modifying the server
+	The email address associated with the server can be changed if needed by editing the config.js file
+
+If the server port has to be changed it can be edited in the app.js file
+
+If you want to add server side processing of the incoming messages the text.js file has to be changed
