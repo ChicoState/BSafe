@@ -8,7 +8,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/ChicoState/BSafe/badge.svg?branch=master)](https://coveralls.io/github/ChicoState/BSafe?branch=master)
 
-[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/35.239.59.44:9090)](https://35.239.59.44:9090)
+[![Server shields.io](https://img.shields.io/website-up-down-green-red/http/35.239.59.44:9090)](https://35.239.59.44:9090)
 
 ## Developers
 
